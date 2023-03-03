@@ -6,8 +6,8 @@ use openai_flows::chat_completion;
 #[tokio::main(flavor = "current_thread")]
 pub async fn run() {
     listen_to_event(
-        "DarumaDockerDev",
-        "github-func-test",
+        "second-state",
+        "chat-with-chatgpt",
         vec!["issue_comment"],
         handler,
     )
@@ -15,15 +15,15 @@ pub async fn run() {
 }
 
 async fn handler(payload: EventPayload) {
-    let octo = get_octo(Some(String::from("DarumaDockerDev")));
-    let issues = octo.issues("DarumaDockerDev", "github-func-test");
+    let octo = get_octo(Some(String::from("second-state")));
+    let issues = octo.issues("second-state", "chat-with-chatgpt");
 
     match payload {
         EventPayload::IssueCommentEvent(e) => {
             if e.comment.user.r#type != "Bot" {
                 if let Some(b) = e.comment.body {
                     if let Some(r) =
-                        chat_completion("DarumaDocker", &format!("issue#{}", e.issue.number), &b)
+                        chat_completion("chatmichael", &format!("issue#{}", e.issue.number), &b)
                     {
                         if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                             write_error_log!(e.to_string());
