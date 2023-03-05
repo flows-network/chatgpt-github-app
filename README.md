@@ -1,7 +1,7 @@
 # chatgpt-github-app
 
 
-Deploy this function on flows.network and you will get a ChatGPT GitHub App.
+[Deploy this function on flows.network](#how-to-deploy-chatgpt-github-app-on-your-github-repo) and you will get a ChatGPT GitHub App.
 
 See a live demo [here](https://github.com/second-state/chat-with-chatgpt/)
 
