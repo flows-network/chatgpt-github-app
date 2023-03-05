@@ -37,6 +37,7 @@ After that, go to my flows page again and click the flow we just created. In the
 <img width="758" alt="image" src="https://user-images.githubusercontent.com/45785633/222973214-ecd052dc-72c2-4711-90ec-db1ec9d5f24e.png">
 2. Click the Connect button to authenciate your GitHub accountout. You'll be redirected to a new page where you must grant flows.network access to install flows-network-integration on the repo you just customized in the first step.
 
+
 That's all. As soon as the function's status is ready, the ChatGPT GitHub App will go live. Go ahead and chat with ChatGPT.
 
 Do note that flows.network is still in its early stages, and there may be some features missing. We would love to hear your feedback!
