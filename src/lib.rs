@@ -13,7 +13,7 @@ pub async fn run() {
     let owner = "second-state";
     let repo = "chat-with-chatgpt";
 
-    listen_to_event(owner, repo, vec!["issue_comment"], |payload| {
+    listen_to_event(owner, repo, vec!["issue_comment", "issues"], |payload| {
         handler(owner, repo, payload)
     })
     .await;
