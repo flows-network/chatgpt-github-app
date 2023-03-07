@@ -10,10 +10,8 @@ use openai_flows::chat_completion;
 #[no_mangle]
 #[tokio::main(flavor = "current_thread")]
 pub async fn run() {
-    let owner = "jaykchen";
-    let repo = "vitesse-lite";
-    // let owner = "second-state";
-    // let repo = "chat-with-chatgpt";
+    let owner = "second-state";
+    let repo = "chat-with-chatgpt";
 
     listen_to_event(owner, repo, vec!["issue_comment"], |payload| {
         handler(owner, repo, payload)
@@ -25,8 +23,7 @@ async fn handler(owner: &str, repo: &str, payload: EventPayload) {
     let octo = get_octo(Some(String::from(owner)));
     let issues = octo.issues(owner, repo);
 
-    let openpi_key_name = "jaykchen";
-    // let openpi_key_name = "chatmichael";
+    let openpi_key_name = "chatmichael";
 
     match payload {
         EventPayload::IssueCommentEvent(e) => {
