@@ -10,7 +10,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 flowsnet-platform-sdk = "0.1.1"
-github-flows = "0.2"
+github-flows = "0.2.0"
 openai-flows = "0.1.2"
 serde_json = "1.0.93"
 tokio_wasi = "1.25.1"
