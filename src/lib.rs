@@ -24,18 +24,18 @@ pub async fn run() {
         Ok(name) => name,
     };
 
-    let OPENPI_KEY_NAME: String = match env::var("OPENPI_KEY_NAME") {
+    let OPENPAI_KEY_NAME: String = match env::var("OPENPAI_KEY_NAME") {
         Err(_) => "chatmichael".to_string(),
         Ok(name) => name,
     };
 
     listen_to_event(&OWNER, &REPO, vec!["issue_comment", "issues"], |payload| {
-        handler(&OWNER, &REPO, &OPENPI_KEY_NAME, payload)
+        handler(&OWNER, &REPO, &OPENPAI_KEY_NAME, payload)
     })
     .await;
 }
 
-async fn handler(OWNER: &str, REPO: &str, OPENPI_KEY_NAME: &str, payload: EventPayload) {
+async fn handler(OWNER: &str, REPO: &str, OPENPAI_KEY_NAME: &str, payload: EventPayload) {
     let octo = get_octo(Some(String::from(OWNER)));
     let issues = octo.issues(OWNER, REPO);
 
@@ -44,7 +44,7 @@ async fn handler(OWNER: &str, REPO: &str, OPENPI_KEY_NAME: &str, payload: EventP
             if e.comment.user.r#type != "Bot" {
                 if let Some(b) = e.comment.body {
                     if let Some(r) =
-                        chat_completion(OPENPI_KEY_NAME, &format!("issue#{}", e.issue.number), &b)
+                        chat_completion(OPENPAI_KEY_NAME, &format!("issue#{}", e.issue.number), &b)
                     {
                         if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                             write_error_log!(e.to_string());
@@ -63,7 +63,7 @@ async fn handler(OWNER: &str, REPO: &str, OPENPI_KEY_NAME: &str, payload: EventP
             let body = e.issue.body.unwrap_or("".to_string());
             let q = title + "\n" + &body;
             if let Some(r) =
-                chat_completion(OPENPI_KEY_NAME, &format!("issue#{}", e.issue.number), &q)
+                chat_completion(OPENPAI_KEY_NAME, &format!("issue#{}", e.issue.number), &q)
             {
                 if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                     write_error_log!(e.to_string());
