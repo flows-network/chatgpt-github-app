@@ -1,3 +1,4 @@
+use dotenv::dotenv;
 use flowsnet_platform_sdk::write_error_log;
 use github_flows::{
     get_octo, listen_to_event,
@@ -6,31 +7,44 @@ use github_flows::{
     },
 };
 use openai_flows::chat_completion;
+use std::env;
 
 #[no_mangle]
 #[tokio::main(flavor = "current_thread")]
 pub async fn run() {
-    let owner = "second-state";
-    let repo = "chat-with-chatgpt";
+    dotenv().ok();
 
-    listen_to_event(owner, repo, vec!["issue_comment", "issues"], |payload| {
-        handler(owner, repo, payload)
+    let OWNER: String = match env::var("OWNER") {
+        Err(_) => "second-state".to_string(),
+        Ok(name) => name,
+    };
+
+    let REPO: String = match env::var("REPO") {
+        Err(_) => "chat-with-chatgpt".to_string(),
+        Ok(name) => name,
+    };
+
+    let OPENPI_KEY_NAME: String = match env::var("OPENPI_KEY_NAME") {
+        Err(_) => "chatmichael".to_string(),
+        Ok(name) => name,
+    };
+
+    listen_to_event(&OWNER, &REPO, vec!["issue_comment", "issues"], |payload| {
+        handler(&OWNER, &REPO, &OPENPI_KEY_NAME, payload)
     })
     .await;
 }
 
-async fn handler(owner: &str, repo: &str, payload: EventPayload) {
-    let octo = get_octo(Some(String::from(owner)));
-    let issues = octo.issues(owner, repo);
-
-    let openpi_key_name = "chatmichael";
+async fn handler(OWNER: &str, REPO: &str, OPENPI_KEY_NAME: &str, payload: EventPayload) {
+    let octo = get_octo(Some(String::from(OWNER)));
+    let issues = octo.issues(OWNER, REPO);
 
     match payload {
         EventPayload::IssueCommentEvent(e) => {
             if e.comment.user.r#type != "Bot" {
                 if let Some(b) = e.comment.body {
                     if let Some(r) =
-                        chat_completion(openpi_key_name, &format!("issue#{}", e.issue.number), &b)
+                        chat_completion(OPENPI_KEY_NAME, &format!("issue#{}", e.issue.number), &b)
                     {
                         if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                             write_error_log!(e.to_string());
@@ -49,7 +63,7 @@ async fn handler(owner: &str, repo: &str, payload: EventPayload) {
             let body = e.issue.body.unwrap_or("".to_string());
             let q = title + "\n" + &body;
             if let Some(r) =
-                chat_completion(openpi_key_name, &format!("issue#{}", e.issue.number), &q)
+                chat_completion(OPENPI_KEY_NAME, &format!("issue#{}", e.issue.number), &q)
             {
                 if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                     write_error_log!(e.to_string());

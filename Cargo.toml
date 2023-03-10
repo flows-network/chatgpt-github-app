@@ -9,6 +9,7 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
+dotenv = "0.15.0"
 flowsnet-platform-sdk = "0.1.1"
 github-flows = "0.2.0"
 openai-flows = "0.1.2"
