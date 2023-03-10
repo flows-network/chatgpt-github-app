@@ -2,9 +2,7 @@ use dotenv::dotenv;
 use flowsnet_platform_sdk::write_error_log;
 use github_flows::{
     get_octo, listen_to_event,
-    octocrab::{
-        actions, models::events::payload::EventPayload, models::events::payload::IssuesEventAction,
-    },
+    octocrab::{models::events::payload::EventPayload, models::events::payload::IssuesEventAction},
 };
 use openai_flows::chat_completion;
 use std::env;
@@ -14,37 +12,37 @@ use std::env;
 pub async fn run() {
     dotenv().ok();
 
-    let OWNER: String = match env::var("OWNER") {
+    let owner: String = match env::var("owner") {
         Err(_) => "second-state".to_string(),
         Ok(name) => name,
     };
 
-    let REPO: String = match env::var("REPO") {
+    let repo: String = match env::var("repo") {
         Err(_) => "chat-with-chatgpt".to_string(),
         Ok(name) => name,
     };
 
-    let OPENPAI_KEY_NAME: String = match env::var("OPENPAI_KEY_NAME") {
+    let openai_key_name: String = match env::var("openai_key_name") {
         Err(_) => "chatmichael".to_string(),
         Ok(name) => name,
     };
 
-    listen_to_event(&OWNER, &REPO, vec!["issue_comment", "issues"], |payload| {
-        handler(&OWNER, &REPO, &OPENPAI_KEY_NAME, payload)
+    listen_to_event(&owner, &repo, vec!["issue_comment", "issues"], |payload| {
+        handler(&owner, &repo, &openai_key_name, payload)
     })
     .await;
 }
 
-async fn handler(OWNER: &str, REPO: &str, OPENPAI_KEY_NAME: &str, payload: EventPayload) {
-    let octo = get_octo(Some(String::from(OWNER)));
-    let issues = octo.issues(OWNER, REPO);
+async fn handler(owner: &str, repo: &str, openai_key_name: &str, payload: EventPayload) {
+    let octo = get_octo(Some(String::from(owner)));
+    let issues = octo.issues(owner, repo);
 
     match payload {
         EventPayload::IssueCommentEvent(e) => {
             if e.comment.user.r#type != "Bot" {
                 if let Some(b) = e.comment.body {
                     if let Some(r) =
-                        chat_completion(OPENPAI_KEY_NAME, &format!("issue#{}", e.issue.number), &b)
+                        chat_completion(openai_key_name, &format!("issue#{}", e.issue.number), &b)
                     {
                         if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                             write_error_log!(e.to_string());
@@ -63,7 +61,7 @@ async fn handler(OWNER: &str, REPO: &str, OPENPAI_KEY_NAME: &str, payload: Event
             let body = e.issue.body.unwrap_or("".to_string());
             let q = title + "\n" + &body;
             if let Some(r) =
-                chat_completion(OPENPAI_KEY_NAME, &format!("issue#{}", e.issue.number), &q)
+                chat_completion(openai_key_name, &format!("issue#{}", e.issue.number), &q)
             {
                 if let Err(e) = issues.create_comment(e.issue.number, r.choice).await {
                     write_error_log!(e.to_string());
