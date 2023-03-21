@@ -46,6 +46,6 @@ Here we can see, we need to configue two SaaS integrations.
 
 2. Click the "Connect/+ Add new authentication" button to authenticate your GitHub account. You'll be redirected to a new page where you must grant [flows.network](https://flows.network/) permission to install the `flows-network-integration` bot on a repo. This repo is the one you entered into the environment variables above.
 
-After that, click the Check button to see your flow details. As soon as the flow function's status becomes `ready`, the ChatGPT GitHub App goes live. Go ahead and chat with ChatGPT by creating an issue!
+After that, click the Check button to see your flow details. As soon as the flow function's status becomes `ready` and the flow's status became `running`, the ChatGPT GitHub App goes live. Go ahead and chat with ChatGPT by creating an issue!
 
 > [flows.network](https://flows.network/) is still in its early stages. We would love to hear your feedback!
