@@ -48,4 +48,6 @@ Here we can see, we need to configue two SaaS integrations.
 
 After that, click the Check button to see your flow details. As soon as the flow function's status becomes `ready` and the flow's status became `running`, the ChatGPT GitHub App goes live. Go ahead and chat with ChatGPT by creating an issue!
 
+![image](https://user-images.githubusercontent.com/45785633/226550405-67d0741c-6c78-42ef-87d1-b30bbd45a5a9.png)
+
 > [flows.network](https://flows.network/) is still in its early stages. We would love to hear your feedback!
