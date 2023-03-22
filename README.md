@@ -4,7 +4,7 @@
 
 See a live demo [here](https://github.com/second-state/chat-with-chatgpt/)
 
-Powered by `gpt-3.5-turbo`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge)
+Powered by `gpt4`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge)
 
 ## Prerequisite 
 
