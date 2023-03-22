@@ -22,15 +22,14 @@ Fork [this repo](https://github.com/flows-network/chatgpt-github-app/) and go to
 
 1. Sign up for an account for deploying flows on [flows.network](https://flows.network/). It's free.
 2. Click on the "Create a Flow" button to start deploying the ChatGPT GitHub APP
-4. Authenticate the [flows.network](https://flows.network/) to access the `chatgpt-github-app` repo you just forked. 
+3. Authenticate the [flows.network](https://flows.network/) to access the `chatgpt-github-app` repo you just forked. 
 ![image](https://user-images.githubusercontent.com/45785633/226546523-93071359-b957-4653-a429-ab983ee9a078.png)
 
-5. Click on the Advanced text and you will see more setting. Fill in the required Environment Variables. In this example, we have three variables. One is `owner`. Fill in the GitHub org Name you want to connect here. The second one is `repo`. Fill in the GitHub repo Name under the GitHub org you just entered. The last one is `openai_key_name`. **Fill in the name you want to name your OpenAI Key**.
+4. Click on the Advanced text and you will see more setting. Fill in the required Environment Variables. In this example, we have three variables. One is `owner`. Fill in the GitHub org Name you want to connect here. The second one is `repo`. Fill in the GitHub repo Name under the GitHub org you just entered. The last one is `openai_key_name`. **Fill in the name you want to name your OpenAI Key**.
 
 ![image](https://user-images.githubusercontent.com/45785633/226547582-a215ed5e-1966-4bdb-b8a1-f4c6d28cc215.png)
 
-
-6. At last, click the Deploy button to deploy your function.
+5. At last, click the Deploy button to deploy your function.
 
 ### Configure SaaS integrations
 
