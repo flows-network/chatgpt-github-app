@@ -37,13 +37,19 @@ pub async fn run() {
         &owner,
         &repo,
         vec!["issue_comment", "issues"],
-        |payload| handler(&owner, &repo, &openai_key_name, payload),
+        |payload| handler(&login, &owner, &repo, &openai_key_name, payload),
     )
     .await;
 }
 
-async fn handler(owner: &str, repo: &str, openai_key_name: &str, payload: EventPayload) {
-    let octo = get_octo(Some(String::from(owner)));
+async fn handler(
+    login: &str,
+    owner: &str,
+    repo: &str,
+    openai_key_name: &str,
+    payload: EventPayload,
+) {
+    let octo = get_octo(Some(String::from(login)));
     let issues = octo.issues(owner, repo);
 
     match payload {
