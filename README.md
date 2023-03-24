@@ -2,11 +2,9 @@
 
 [Deploy this function on flows.network](#deploy-chatgpt-github-app-on-your-github-repo), and you will get a GitHub bot that uses ChatGPT to respond to every comment in your GitHub issues automatically. It enables developers to use GitHub Issues as the conversational UI for ChatGPT!
 
-See a live demo [here](https://github.com/second-state/chat-with-chatgpt/)
+See a live demo [here](https://github.com/second-state/chat-with-chatgpt/) | Powered by `gpt4`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge).
 
-Powered by `gpt4`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge).
-
-IMPORTANT NOTICE: If you have deployed this function on flows.network beofore 7AM 24/03/2023(UTC), Please refer to [this issue](https://github.com/flows-network/chatgpt-github-app/issues/4) to fix your GitHub App.
+IMPORTANT NOTICE: If you have deployed this function on flows.network before 7 AM 24/03/2023(UTC), please refer to this issue to fix your GitHub App.
 
 ## Prerequisite 
 
