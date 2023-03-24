@@ -4,7 +4,7 @@
 
 See a live demo [here](https://github.com/second-state/chat-with-chatgpt/) | Powered by `gpt4`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge).
 
-IMPORTANT NOTICE: If you have deployed this function on flows.network before 7 AM 24/03/2023(UTC), please refer to this issue to fix your GitHub App.
+IMPORTANT NOTICE: If you have deployed this function on flows.network before 7 AM 24/03/2023(UTC), please refer to [this issue](https://github.com/flows-network/chatgpt-github-app/issues/4) to fix your GitHub App.
 
 ## Prerequisite 
 
