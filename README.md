@@ -4,7 +4,9 @@
 
 See a live demo [here](https://github.com/second-state/chat-with-chatgpt/)
 
-Powered by `gpt4`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge)
+Powered by `gpt4`, Rust and [WasmEdge](https://github.com/WasmEdge/WasmEdge).
+
+IMPORTANT NOTICE: If you have deployed this function on flows.network beofore 7AM 24/03/2023(UTC), Please refer to [this issue](https://github.com/flows-network/chatgpt-github-app/issues/4) to fix your GitHub App.
 
 ## Prerequisite 
 
@@ -25,9 +27,13 @@ Fork [this repo](https://github.com/flows-network/chatgpt-github-app/) and go to
 3. Authenticate the [flows.network](https://flows.network/) to access the `chatgpt-github-app` repo you just forked. 
 ![image](https://user-images.githubusercontent.com/45785633/226546523-93071359-b957-4653-a429-ab983ee9a078.png)
 
-4. Click on the Advanced text and you will see more setting. Fill in the required Environment Variables. In this example, we have three variables. One is `owner`. Fill in the GitHub org Name you want to connect here. The second one is `repo`. Fill in the GitHub repo Name under the GitHub org you just entered. The last one is `openai_key_name`. **Fill in the name you want to name your OpenAI Key**.
+4. Click on the Advanced text and you will see more settings. we can fill in the required Environment Variables here. In this example, we have four variables. 
+* One is `login`: Fill in your personel github id here. The github app will act as you when respond to questions. 
+* The second one is `owner`: Fill in the GitHub org Name you want to connect here. 
+* The thrid one is `repo` : Fill in the GitHub repo Name under the GitHub org you just entered. 
+* The last one is `openai_key_name` : **Fill in the name you want to name your OpenAI Key**.
 
-![image](https://user-images.githubusercontent.com/45785633/226547582-a215ed5e-1966-4bdb-b8a1-f4c6d28cc215.png)
+![image](https://user-images.githubusercontent.com/45785633/227463828-9ea913a5-f0a0-46bd-8d4c-da439ee72a94.png)
 
 5. At last, click the Deploy button to deploy your function.
 
