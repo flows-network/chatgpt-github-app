@@ -2,7 +2,7 @@ use dotenv::dotenv;
 use flowsnet_platform_sdk::write_error_log;
 use github_flows::{
     get_octo, listen_to_event,
-    octocrab::{models::events::payload::EventPayload, models::events::payload::IssuesEventAction},
+    octocrab::{models::events::payload::EventPayload, models::events::payload::IssuesEventAction, issues::IssueHandler},
 };
 use openai_flows::{chat_completion, ChatModel, ChatOptions};
 use std::env;
@@ -42,6 +42,20 @@ pub async fn run() {
     .await;
 }
 
+async fn create_issue_comment (issues: IssueHandler<'_>, issue_number: u64, text: &str) {
+    match issues.create_comment(issue_number, text).await {
+        Ok(comment) => {
+            store_flows::set(
+                "last_created_comment",
+                serde_json::to_value(comment.id.into_inner()).unwrap(),
+           );
+        }
+        Err(e) => {
+            write_error_log!(e.to_string());
+        }
+    }
+}
+
 async fn handler(
     login: &str,
     owner: &str,
@@ -64,20 +78,10 @@ async fn handler(
                         &ChatOptions::default(),
                     ) {
                         if r.restarted {
-                            issues.create_comment(e.issue.number, "Sorry, I only have limited amount of time for each conversation. This conversation has expired. If you would like to as a new question, please raise a new Issue. Thanks!").await.unwrap();
+                            create_issue_comment(issues, e.issue.number, "Sorry, I only have limited amount of time for each conversation. This conversation has expired. If you would like to as a new question, please raise a new Issue. Thanks!").await;
                             return;
                         }
-                        match issues.create_comment(e.issue.number, r.choice).await {
-                            Ok(comment) => {
-                                store_flows::set(
-                                    "last_created_comment",
-                                    serde_json::to_value(comment.id.into_inner()).unwrap(),
-                                );
-                            }
-                            Err(e) => {
-                                write_error_log!(e.to_string());
-                            }
-                        }
+                        create_issue_comment(issues, e.issue.number, &r.choice).await;
                     }
                 }
             }
@@ -105,17 +109,7 @@ async fn handler(
                 &q,
                 &co,
             ) {
-                match issues.create_comment(e.issue.number, r.choice).await {
-                    Ok(comment) => {
-                        store_flows::set(
-                            "last_created_comment",
-                            serde_json::to_value(comment.id.into_inner()).unwrap(),
-                        );
-                    }
-                    Err(e) => {
-                        write_error_log!(e.to_string());
-                    }
-                }
+                create_issue_comment(issues, e.issue.number, &r.choice).await;
             }
         }
 
