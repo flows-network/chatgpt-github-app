@@ -63,6 +63,10 @@ async fn handler(
                         &b,
                         &ChatOptions::default(),
                     ) {
+                        if r.restarted {
+                            issues.create_comment(e.issue.number, "Sorry, I only have limited amount of time for each conversation. This conversation has expired. If you would like to as a new question, please raise a new Issue. Thanks!").await.unwrap();
+                            return;
+                        }
                         match issues.create_comment(e.issue.number, r.choice).await {
                             Ok(comment) => {
                                 store_flows::set(
