@@ -71,11 +71,16 @@ async fn handler(
             let last_comment_id = store_flows::get("last_created_comment").unwrap_or_default();
             if e.comment.id.into_inner() != last_comment_id.as_u64().unwrap_or_default() {
                 if let Some(b) = e.comment.body {
+                    let co = ChatOptions {
+                        model: ChatModel::GPT35Turbo,
+                        restart: false,
+                        restarted_sentence: None,
+                    };
                     if let Some(r) = chat_completion(
                         openai_key_name,
                         &format!("issue#{}", e.issue.number),
                         &b,
-                        &ChatOptions::default(),
+                        &co,
                     ) {
                         if r.restarted {
                             create_issue_comment(issues, e.issue.number, "Sorry, I only have limited amount of time for each conversation. This conversation has expired. If you would like to as a new question, please raise a new Issue. Thanks!").await;
@@ -98,7 +103,7 @@ async fn handler(
 
             let prompt = "You are a helpful assistant answering questions on GitHub. In your response, you can use simple markdown text to format your answers.\n\nIf someone greets you without asking a question, you should simply respond \"Hello, I am your assistant on GitHub, built by the Second State team. I am ready for your question now!\"";
             let co = ChatOptions {
-                model: ChatModel::GPT4,
+                model: ChatModel::GPT35Turbo,
                 restart: true,
                 restarted_sentence: Some(prompt),
             };
