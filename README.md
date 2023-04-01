@@ -1,4 +1,16 @@
-# A ChatGPT bot to respond to your GitHub Issues
+# <p align="center">A ChatGPT bot to respond to your GitHub Issues</p>
+
+<p align="center">
+  <a href="https://discord.gg/ccZn9ZMfFf">
+    <img src="https://img.shields.io/badge/chat-Discord-7289DA?logo=discord" alt="flows.network Discord">
+  </a>
+  <a href="https://twitter.com/flows_network">
+    <img src="https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&amp;logoColor=white" alt="flows.network Twitter">
+  </a>
+   <a href="https://flows.network/flow/new">
+    <img src="https://img.shields.io/website?up_message=deploy&url=https%3A%2F%2Fflows.network%2Fflow%2Fnew" alt="Create a flow">
+  </a>
+</p>
 
 [Deploy this function on flows.network](#deploy-chatgpt-github-app-on-your-github-repo), and you will get a GitHub bot that uses ChatGPT to respond to every comment in your GitHub issues automatically. It enables developers to use GitHub Issues as the conversational UI for ChatGPT!
 
