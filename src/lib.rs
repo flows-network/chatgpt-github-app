@@ -72,10 +72,10 @@ async fn handler(
             if e.comment.id.into_inner() != last_comment_id.as_u64().unwrap_or_default() {
                 if let Some(b) = e.comment.body {
                     let co = ChatOptions {
-                        model: ChatModel::GPT35Turbo,
-                        // model: ChatModel::GPT4,
+                        // model: ChatModel::GPT35Turbo,
+                        model: ChatModel::GPT4,
                         restart: false,
-                        restarted_sentence: None,
+                        system_prompt: None,
                     };
                     if let Some(r) = chat_completion(
                         openai_key_name,
@@ -84,7 +84,7 @@ async fn handler(
                         &co,
                     ) {
                         if r.restarted {
-                            create_issue_comment(issues, e.issue.number, "Sorry, I only have limited amount of time for each conversation. This conversation has expired. If you would like to as a new question, please raise a new Issue. Thanks!").await;
+                            create_issue_comment(issues, e.issue.number, "Sorry, this conversation has expired. If you would like to as a new question, please raise a new Issue. Thanks!").await;
                             return;
                         }
                         create_issue_comment(issues, e.issue.number, &r.choice).await;
@@ -102,12 +102,12 @@ async fn handler(
             let body = e.issue.body.unwrap_or("".to_string());
             let q = title + "\n" + &body;
 
-            let prompt = "You are a helpful assistant answering questions on GitHub. In your response, you can use simple markdown text to format your answers.\n\nIf someone greets you without asking a question, you should simply respond \"Hello, I am your assistant on GitHub, built by the Second State team. I am ready for your question now!\"";
+            let system = "You are a helpful assistant. In your response, you can use simple markdown text.\n\nIf someone greets you without asking a question, you should simply respond \"Hello, I am your assistant on GitHub, built by the Second State team. I am ready for your question now!\"";
             let co = ChatOptions {
-                model: ChatModel::GPT35Turbo,
-                // model: ChatModel::GPT4,
+                // model: ChatModel::GPT35Turbo,
+                model: ChatModel::GPT4,
                 restart: true,
-                restarted_sentence: Some(prompt),
+                system_prompt: Some(system),
             };
 
             if let Some(r) = chat_completion(
