@@ -63,8 +63,8 @@ async fn handler(
             if e.comment.id.into_inner() != last_comment_id.as_u64().unwrap_or_default() {
                 if let Some(b) = e.comment.body {
                     let co = ChatOptions {
-                        // model: ChatModel::GPT35Turbo,
-                        model: ChatModel::GPT4,
+                        model: ChatModel::GPT35Turbo,
+                        // model: ChatModel::GPT4,
                         restart: false,
                         system_prompt: None,
                     };
@@ -97,8 +97,8 @@ async fn handler(
 
             let system = "You are a helpful assistant. In your response, you can use simple markdown text.\n\nIf someone greets you without asking a question, you should simply respond \"Hello, I am your assistant on GitHub, built by the Second State team. I am ready for your question now!\"";
             let co = ChatOptions {
-                // model: ChatModel::GPT35Turbo,
-                model: ChatModel::GPT4,
+                model: ChatModel::GPT35Turbo,
+                // model: ChatModel::GPT4,
                 restart: true,
                 system_prompt: Some(system),
             };
