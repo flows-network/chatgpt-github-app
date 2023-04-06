@@ -67,6 +67,7 @@ async fn handler(
                         // model: ChatModel::GPT4,
                         restart: false,
                         system_prompt: None,
+                        retry_times: 3,
                     };
                     if let Some(r) = chat_completion(
                         openai_key_name,
@@ -101,6 +102,7 @@ async fn handler(
                 // model: ChatModel::GPT4,
                 restart: true,
                 system_prompt: Some(system),
+                retry_times: 3,
             };
 
             if let Some(r) = chat_completion(
