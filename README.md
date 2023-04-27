@@ -53,7 +53,7 @@ After that, [flows.network](https://flows.network/) will direct you to configure
 
 ![image](https://user-images.githubusercontent.com/45785633/226547995-54927771-7782-484a-8c9c-908e91f99444.png)
 
-Here we can see, we need to configue two SaaS integrations.
+Here we can see, we need to configure two SaaS integrations.
 
 1. Click on the "Connect" or "+ Add new authentication" button to authenticate your OpenAI account. On the next page, copy and paste your OpenAI API key and then name the key. **Note** the name you enter here should be the same as the name in the environment variables.
 
