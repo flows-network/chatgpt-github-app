@@ -38,7 +38,7 @@ Fork [this repo](https://github.com/flows-network/chatgpt-github-app/) and go to
 ![image](https://user-images.githubusercontent.com/45785633/226546523-93071359-b957-4653-a429-ab983ee9a078.png)
 
 4. Click on the Advanced text and you will see more settings. we can fill in the required Environment Variables here. In this example, we have four variables. 
-* `login`: Fill in your personel github id here. The github app will act as you when responding to questions. 
+* `login`: Fill in your personal GitHub id here. The GitHub app will act as you when responding to questions. 
 * `owner`: Fill in the GitHub org you want to deploy the bot on. 
 * `repo` : Fill in the GitHub repo you want to deploy the bot on. 
 * `openai_key_name` : Fill in the name you want for your OpenAI key. You can put any name here, and we will connect it to the actual key later.
